@@ -4,9 +4,11 @@ use std::process::{Command, Stdio};
 use crate::problem::*;
 use crate::solver::*;
 
+pub const PY_INTERPRETER_PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../.venv/bin/python3");
+
 fn verify(solver: &TransportationSolver) {
     // Spawn the command
-    let mut child = Command::new(".venv/bin/python3")
+    let mut child = Command::new(PY_INTERPRETER_PATH)
         .stdin(Stdio::piped())
         .args(["scripts/check.py"])
         .spawn()
@@ -173,7 +175,7 @@ mod artifact {
             })
             .collect::<Vec<_>>();
 
-        Command::new(".venv/bin/python3")
+        Command::new(PY_INTERPRETER_PATH)
             .stdin(Stdio::piped())
             .args(["scripts/plot.py"])
             .spawn()
