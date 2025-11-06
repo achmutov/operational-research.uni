@@ -12,8 +12,8 @@ pub fn solve<D: Distance>(cities: &[City]) -> (Vec<(usize, usize)>, Vec<Vec<f32>
                 let ptr = matrix_ptr as *mut Vec<f32>;
                 let a = ptr.add(i);
                 let b = ptr.add(j);
-                (*a)[j] = distance;
-                (*b)[i] = distance;
+                (&mut (*a))[j] = distance;
+                (&mut (*b))[i] = distance;
             }
         }
     });
